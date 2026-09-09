@@ -8,28 +8,292 @@
   <meta name="description" content="Персональный трекер договорной неустойки: €50 за каждый начатый день просрочки." />
   <title>Kostik Time — €50/day</title>
   <style>
-    :root{--bg:#070910;--panel:rgba(15,18,31,.76);--panel2:rgba(20,24,41,.72);--line:rgba(255,255,255,.09);--text:#f5f7ff;--muted:#8d96ad;--red:#ff5d6f;--red2:#ff8a98;--green:#40e6a7;--cyan:#62cfff;--violet:#8e7bff;--shadow:0 24px 80px rgba(0,0,0,.38)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(900px 500px at 8% -10%,rgba(98,207,255,.16),transparent 55%),radial-gradient(800px 520px at 100% 0%,rgba(142,123,255,.19),transparent 52%),radial-gradient(900px 600px at 50% 120%,rgba(64,230,167,.08),transparent 55%),var(--bg);overflow-x:hidden}body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(to bottom,#000 0%,transparent 80%)}
-    .shell{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:22px 0 48px;position:relative}header{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.mark{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font-weight:950;font-size:19px;background:linear-gradient(135deg,var(--violet),var(--cyan));box-shadow:0 10px 35px rgba(98,207,255,.14)}.brand h1{margin:0;font-size:17px;letter-spacing:-.02em;white-space:nowrap}.brand p{margin:3px 0 0;color:var(--muted);font-size:11px}.live-badge{display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:999px;border:1px solid rgba(255,93,111,.22);background:rgba(255,93,111,.075);font-size:11px;font-weight:900;color:#ffc4ca;white-space:nowrap}.dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(255,93,111,.45);animation:pulse 1.8s infinite}@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(255,93,111,0)}100%{box-shadow:0 0 0 0 rgba(255,93,111,0)}}
-    .hero{position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(145deg,rgba(21,25,45,.88),rgba(9,11,20,.78));backdrop-filter:blur(18px);border-radius:28px;padding:28px;box-shadow:var(--shadow)}.hero::after{content:"";position:absolute;width:430px;height:430px;right:-210px;top:-245px;border-radius:50%;background:radial-gradient(circle,rgba(255,93,111,.18),transparent 66%);pointer-events:none}.hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:24px;align-items:stretch}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:10px;color:var(--muted);font-weight:900}.penalty{font-size:clamp(62px,9vw,108px);line-height:.9;letter-spacing:-.07em;font-weight:950;margin:16px 0 10px;font-variant-numeric:tabular-nums;background:linear-gradient(110deg,#fff 4%,#ffc7cd 36%,#ff7888 74%);-webkit-background-clip:text;background-clip:text;color:transparent}.hero-desc{display:flex;gap:16px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px;line-height:1.55}.hero-desc strong{color:var(--text)}.rate{display:inline-flex;align-items:center;gap:7px;padding:9px 11px;border-radius:12px;background:rgba(255,93,111,.09);border:1px solid rgba(255,93,111,.16);color:#ffc3cb;font-weight:900;font-size:12px}
-    .countdown-card{height:100%;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.035);padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:190px}.countdown-label{font-size:11px;color:var(--muted);font-weight:800}.countdown{font-size:clamp(32px,5vw,48px);font-weight:950;letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin:10px 0 4px}.countdown-sub{font-size:11px;color:var(--muted);line-height:1.5}.bar{height:8px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:16px}.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--red));border-radius:inherit;transition:width .4s linear}
-    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}.card{border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(14px);border-radius:20px;padding:17px;min-height:126px;box-shadow:0 12px 35px rgba(0,0,0,.12)}.label{font-size:11px;color:var(--muted);margin-bottom:12px}.value{font-size:30px;font-weight:950;letter-spacing:-.045em;font-variant-numeric:tabular-nums}.value.red{color:var(--red2)}.value.green{color:var(--green)}.hint{font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.45}
-    .section{margin-top:24px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:11px}.section-head h2{margin:0;font-size:17px;letter-spacing:-.02em}.section-head span{font-size:11px;color:var(--muted)}.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.milestone{border:1px solid var(--line);background:var(--panel2);border-radius:17px;padding:15px}.milestone .date{font-size:10.5px;color:var(--cyan);font-weight:900;margin-bottom:7px}.milestone .text{font-size:12px;line-height:1.45;font-weight:800}
-    .table-wrap{border:1px solid var(--line);background:rgba(13,16,27,.72);border-radius:20px;overflow:hidden}.table-scroll{max-height:430px;overflow:auto;overscroll-behavior:contain}table{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}thead{position:sticky;top:0;background:#111522;z-index:2}th,td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.055);text-align:left}th{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}td:nth-child(n+3),th:nth-child(n+3){text-align:right}tr.today{background:linear-gradient(90deg,rgba(255,93,111,.06),rgba(98,207,255,.035))}.plus{color:#ff9fac;font-weight:900}.sum{font-weight:900}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}button{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.055);color:#fff;border-radius:13px;padding:10px 13px;font-size:11px;font-weight:900;cursor:pointer;transition:.18s}button:hover{transform:translateY(-1px);background:rgba(255,255,255,.08)}button.primary{border-color:transparent;background:linear-gradient(135deg,var(--violet),#6575ff)}.footnote{margin-top:18px;padding-left:11px;border-left:2px solid rgba(255,255,255,.12);color:var(--muted);font-size:10.5px;line-height:1.55}.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:#fff;color:#0a0c13;padding:9px 13px;border-radius:999px;font-size:11px;font-weight:900;transition:.22s;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}
-    @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.timeline{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.shell{width:min(100% - 20px,1180px);padding-top:14px}.hero{padding:19px;border-radius:22px}.hero-grid{gap:14px}.penalty{font-size:64px}.cards{gap:8px}.card{padding:14px;min-height:112px}.value{font-size:25px}.timeline{grid-template-columns:1fr}.brand p{display:none}.live-badge{padding:8px 10px}.table-scroll{max-height:360px}th:nth-child(4),td:nth-child(4){display:none}}@media print{body{background:#fff;color:#111}.shell{width:100%;padding:0}.hero,.card,.milestone,.table-wrap,.countdown-card{background:#fff;border-color:#ddd;box-shadow:none}.penalty{-webkit-text-fill-color:#111;color:#111}.live-badge,.actions,.toast{display:none}.value.red,.value.green{color:#111}.table-scroll{max-height:none;overflow:visible}thead{position:static;background:#f4f4f4}.label,.hint,.footnote,.section-head span,.hero-desc,.countdown-label,.countdown-sub{color:#555}}
+    :root{
+      --bg:#070910;--panel:rgba(15,18,31,.76);--panel2:rgba(20,24,41,.72);--line:rgba(255,255,255,.09);
+      --text:#f5f7ff;--muted:#8d96ad;--red:#ff5d6f;--red2:#ff8a98;--orange:#ff9d4d;--green:#40e6a7;
+      --cyan:#62cfff;--violet:#8e7bff;--shadow:0 24px 80px rgba(0,0,0,.38)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(900px 500px at 8% -10%,rgba(98,207,255,.16),transparent 55%),radial-gradient(800px 520px at 100% 0%,rgba(142,123,255,.19),transparent 52%),radial-gradient(900px 600px at 50% 120%,rgba(64,230,167,.08),transparent 55%),var(--bg);overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(to bottom,#000 0%,transparent 80%)}
+    .shell{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:22px 0 48px;position:relative}
+    header{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}.mark{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font-weight:950;font-size:19px;background:linear-gradient(135deg,var(--violet),var(--cyan));box-shadow:0 10px 35px rgba(98,207,255,.14)}
+    .brand h1{margin:0;font-size:17px;letter-spacing:-.02em;white-space:nowrap}.brand p{margin:3px 0 0;color:var(--muted);font-size:11px}
+    .live-badge{display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:999px;border:1px solid rgba(255,93,111,.22);background:rgba(255,93,111,.075);font-size:11px;font-weight:900;color:#ffc4ca;white-space:nowrap}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(255,93,111,.45);animation:pulse 1.8s infinite}
+    @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(255,93,111,0)}100%{box-shadow:0 0 0 0 rgba(255,93,111,0)}}
+
+    .hero{position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(145deg,rgba(21,25,45,.88),rgba(9,11,20,.78));backdrop-filter:blur(18px);border-radius:28px;padding:28px;box-shadow:var(--shadow)}
+    .hero::after{content:"";position:absolute;width:430px;height:430px;right:-210px;top:-245px;border-radius:50%;background:radial-gradient(circle,rgba(255,93,111,.18),transparent 66%);pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:24px;align-items:stretch}
+    .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:10px;color:var(--muted);font-weight:900}
+    .penalty{font-size:clamp(62px,9vw,108px);line-height:.9;letter-spacing:-.07em;font-weight:950;margin:16px 0 10px;font-variant-numeric:tabular-nums;background:linear-gradient(110deg,#fff 4%,#ffc7cd 36%,#ff7888 74%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero-desc{display:flex;gap:16px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px;line-height:1.55}.hero-desc strong{color:var(--text)}
+    .rate{display:inline-flex;align-items:center;gap:7px;padding:9px 11px;border-radius:12px;background:rgba(255,93,111,.09);border:1px solid rgba(255,93,111,.16);color:#ffc3cb;font-weight:900;font-size:12px}
+    .countdown-card{height:100%;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.035);padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:190px}
+    .countdown-label{font-size:11px;color:var(--muted);font-weight:800}.countdown{font-size:clamp(32px,5vw,48px);font-weight:950;letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin:10px 0 4px}.countdown-sub{font-size:11px;color:var(--muted);line-height:1.5}
+    .bar{height:8px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:16px}.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--red));border-radius:inherit;transition:width .4s linear}
+
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}.card{border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(14px);border-radius:20px;padding:17px;min-height:126px;box-shadow:0 12px 35px rgba(0,0,0,.12)}
+    .label{font-size:11px;color:var(--muted);margin-bottom:12px}.value{font-size:30px;font-weight:950;letter-spacing:-.045em;font-variant-numeric:tabular-nums}.value.red{color:var(--red2)}.value.green{color:var(--green)}.hint{font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.45}
+    .section{margin-top:24px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:11px}.section-head h2{margin:0;font-size:17px;letter-spacing:-.02em}.section-head span{font-size:11px;color:var(--muted)}
+    .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.milestone{border:1px solid var(--line);background:var(--panel2);border-radius:17px;padding:15px}.milestone .date{font-size:10.5px;color:var(--cyan);font-weight:900;margin-bottom:7px}.milestone .text{font-size:12px;line-height:1.45;font-weight:800}
+
+    .court-wrap{position:relative;overflow:hidden;border:1px solid rgba(255,112,78,.26);background:linear-gradient(145deg,rgba(52,18,20,.72),rgba(16,10,18,.92));border-radius:28px;padding:26px;box-shadow:0 20px 70px rgba(255,93,111,.09),inset 0 0 0 1px rgba(255,255,255,.015)}
+    .court-wrap::before{content:"";position:absolute;inset:-2px;pointer-events:none;background:radial-gradient(550px 180px at 50% 110%,rgba(255,95,60,.16),transparent 60%);animation:courtGlow 2.8s ease-in-out infinite}
+    @keyframes courtGlow{50%{opacity:.5}100%{opacity:1}}
+    .court-head{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}.court-title{margin:4px 0 0;font-size:clamp(24px,5vw,42px);letter-spacing:-.04em}.court-badge{padding:8px 11px;border-radius:999px;background:rgba(255,93,111,.1);border:1px solid rgba(255,93,111,.25);font-size:10px;font-weight:950;color:#ffc7cc;letter-spacing:.06em}
+    .court-count{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}.court-unit{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);border-radius:18px;padding:14px;text-align:center}.court-num{font-size:clamp(34px,6vw,58px);font-weight:950;letter-spacing:-.055em;font-variant-numeric:tabular-nums}.court-unit span{display:block;margin-top:4px;color:var(--muted);font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+    .court-progress-shell{position:relative;margin-top:18px;padding-top:26px}.court-progress-labels{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:10px;margin-bottom:8px}.court-progress{position:relative;height:24px;border-radius:999px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);overflow:hidden}.court-progress-fill{position:absolute;inset:0 auto 0 0;width:0;border-radius:inherit;background:linear-gradient(90deg,#ff7a46,#ff5d6f,#ff3e6c);box-shadow:0 0 22px rgba(255,93,111,.28);transition:width .45s linear}
+    .court-joke{position:absolute;inset:0;display:grid;place-items:center;font-size:10px;font-weight:950;letter-spacing:.045em;text-transform:uppercase;color:#fff;white-space:nowrap;pointer-events:none;clip-path:inset(0 100% 0 0);transition:clip-path .45s linear;text-shadow:0 1px 10px rgba(0,0,0,.55)}
+    .court-meta{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.court-meta>div{border-top:1px solid rgba(255,255,255,.07);padding-top:11px}.court-meta b{display:block;font-size:11px;margin-bottom:4px}.court-meta span{font-size:10px;color:var(--muted);line-height:1.45}
+    .court-expired{display:none;position:relative;margin-top:18px;padding:18px;border-radius:18px;background:rgba(255,93,111,.09);border:1px solid rgba(255,93,111,.22)}.court-expired strong{font-size:26px;letter-spacing:-.03em}.court-expired p{margin:6px 0 0;color:#ffc6cc;font-size:11px;line-height:1.5}
+
+    .table-wrap{border:1px solid var(--line);background:rgba(13,16,27,.72);border-radius:20px;overflow:hidden}.table-scroll{max-height:430px;overflow:auto;overscroll-behavior:contain}table{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}thead{position:sticky;top:0;background:#111522;z-index:2}th,td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.055);text-align:left}th{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}td:nth-child(n+3),th:nth-child(n+3){text-align:right}tr.today{background:linear-gradient(90deg,rgba(255,93,111,.06),rgba(98,207,255,.035))}.plus{color:#ff9fac;font-weight:900}.sum{font-weight:900}
+    .actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}button{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.055);color:#fff;border-radius:13px;padding:10px 13px;font-size:11px;font-weight:900;cursor:pointer;transition:.18s}button:hover{transform:translateY(-1px);background:rgba(255,255,255,.08)}button.primary{border-color:transparent;background:linear-gradient(135deg,var(--violet),#6575ff)}
+    .footnote{margin-top:18px;padding-left:11px;border-left:2px solid rgba(255,255,255,.12);color:var(--muted);font-size:10.5px;line-height:1.55}.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:#fff;color:#0a0c13;padding:9px 13px;border-radius:999px;font-size:11px;font-weight:900;transition:.22s;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+    @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.timeline{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.shell{width:min(100% - 20px,1180px);padding-top:14px}.hero,.court-wrap{padding:19px;border-radius:22px}.hero-grid{gap:14px}.penalty{font-size:64px}.cards{gap:8px}.card{padding:14px;min-height:112px}.value{font-size:25px}.timeline{grid-template-columns:1fr}.brand p{display:none}.live-badge{padding:8px 10px}.table-scroll{max-height:360px}th:nth-child(4),td:nth-child(4){display:none}.court-count{gap:6px}.court-unit{padding:11px 6px}.court-num{font-size:34px}.court-meta{grid-template-columns:1fr}.court-progress-labels{font-size:9px}.court-joke{font-size:9px}}
+    @media print{body{background:#fff;color:#111}.shell{width:100%;padding:0}.hero,.card,.milestone,.table-wrap,.countdown-card,.court-wrap{background:#fff;border-color:#ddd;box-shadow:none}.penalty{-webkit-text-fill-color:#111;color:#111}.live-badge,.actions,.toast{display:none}.value.red,.value.green{color:#111}.table-scroll{max-height:none;overflow:visible}thead{position:static;background:#f4f4f4}.label,.hint,.footnote,.section-head span,.hero-desc,.countdown-label,.countdown-sub,.court-meta span,.court-progress-labels{color:#555}.court-joke{color:#111;text-shadow:none}}
   </style>
 </head>
 <body>
-  <div class="shell"><header><div class="brand"><div class="mark">€</div><div><h1>Kostik Time</h1><p>Точный трекер договорной неустойки</p></div></div><div class="live-badge"><span class="dot"></span> ПРОСРОЧКА АКТИВНА</div></header>
+  <div class="shell">
+    <header>
+      <div class="brand"><div class="mark">€</div><div><h1>Kostik Time</h1><p>Точный трекер договорной неустойки</p></div></div>
+      <div class="live-badge"><span class="dot"></span> ПРОСРОЧКА АКТИВНА</div>
+    </header>
     <main>
-      <section class="hero"><div class="hero-grid"><div><div class="eyebrow">Накопленная договорная неустойка</div><div class="penalty" id="penaltyHero">€0</div><div class="hero-desc"><span><strong id="daysHero">0 дней</strong> просрочки</span><span class="rate">+ €50 за каждый начатый день</span></div></div><div class="countdown-card"><div><div class="countdown-label">До следующего начисления +€50</div><div class="countdown" id="nextTick">--:--:--</div><div class="countdown-sub">Новый начатый день считается с 00:00 по времени Europe/Prague.</div></div><div><div class="bar"><div id="dayProgress"></div></div><div class="countdown-sub" style="margin-top:8px">Прага сейчас: <span id="pragueNow">—</span></div></div></div></div></section>
-      <section class="cards" aria-label="Сводка"><article class="card"><div class="label">Основной долг</div><div class="value">€5 000</div><div class="hint">Срок оплаты: 31.07.2026</div></article><article class="card"><div class="label">Начатых дней просрочки</div><div class="value red" id="daysCard">0</div><div class="hint">Отсчёт с 01.08.2026 включительно</div></article><article class="card"><div class="label">Неустойка по €50/день</div><div class="value red" id="penaltyCard">€0</div><div class="hint">Обновляется автоматически по календарной дате Праги</div></article><article class="card"><div class="label">Долг + неустойка</div><div class="value green" id="totalCard">€5 000</div><div class="hint">Без процентов, суда и расходов на представительство</div></article></section>
-      <section class="section"><div class="section-head"><h2>Ключевые даты</h2><span>Формула: €50 × число начатых дней</span></div><div class="timeline"><article class="milestone"><div class="date">02.04.2026</div><div class="text">Подписано соглашение</div></article><article class="milestone"><div class="date">08.04.2026</div><div class="text">Перечислено €10 000</div></article><article class="milestone"><div class="date">31.07.2026</div><div class="text">Крайний срок оставшихся €5 000</div></article><article class="milestone"><div class="date">01.08.2026</div><div class="text">Старт €50 за каждый начатый день просрочки</div></article></div></section>
-      <section class="section"><div class="section-head"><h2>Начисление по дням</h2><span id="historyCaption">—</span></div><div class="table-wrap"><div class="table-scroll" id="tableScroll"><table><thead><tr><th>День</th><th>Дата</th><th>За день</th><th>Неустойка</th><th>Всего</th></tr></thead><tbody id="historyBody"></tbody></table></div></div><div class="actions"><button class="primary" id="copyBtn">Скопировать сумму на сегодня</button><button id="printBtn">Печать / сохранить PDF</button></div></section>
-      <div class="footnote">Личный расчётный трекер. Он считает только основной долг €5 000 и договорную неустойку €50 за каждый начатый день просрочки с 01.08.2026. Законные проценты, судебные расходы, расходы на адвоката и возможная судебная корректировка неустойки в итог не включены.</div>
-    </main></div><div class="toast" id="toast">Скопировано</div>
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Накопленная договорная неустойка</div>
+            <div class="penalty" id="penaltyHero">€0</div>
+            <div class="hero-desc"><span><strong id="daysHero">0 дней</strong> просрочки</span><span class="rate">+ €50 за каждый начатый день</span></div>
+          </div>
+          <div class="countdown-card">
+            <div><div class="countdown-label">До следующего начисления +€50</div><div class="countdown" id="nextTick">--:--:--</div><div class="countdown-sub">Новый начатый день считается с 00:00 по времени Europe/Prague.</div></div>
+            <div><div class="bar"><div id="dayProgress"></div></div><div class="countdown-sub" style="margin-top:8px">Прага сейчас: <span id="pragueNow">—</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cards" aria-label="Сводка">
+        <article class="card"><div class="label">Основной долг</div><div class="value">€5 000</div><div class="hint">Срок оплаты: 31.07.2026</div></article>
+        <article class="card"><div class="label">Начатых дней просрочки</div><div class="value red" id="daysCard">0</div><div class="hint">Отсчёт с 01.08.2026 включительно</div></article>
+        <article class="card"><div class="label">Неустойка по €50/день</div><div class="value red" id="penaltyCard">€0</div><div class="hint">Обновляется автоматически по календарной дате Праги</div></article>
+        <article class="card"><div class="label">Долг + неустойка</div><div class="value green" id="totalCard">€5 000</div><div class="hint">Без процентов, суда и расходов на представительство</div></article>
+      </section>
+
+      <section class="section">
+        <div class="section-head"><h2>Ключевые даты</h2><span>Формула: €50 × число начатых дней</span></div>
+        <div class="timeline">
+          <article class="milestone"><div class="date">02.04.2026</div><div class="text">Подписано соглашение</div></article>
+          <article class="milestone"><div class="date">08.04.2026</div><div class="text">Перечислено €10 000</div></article>
+          <article class="milestone"><div class="date">31.07.2026</div><div class="text">Крайний срок оставшихся €5 000</div></article>
+          <article class="milestone"><div class="date">01.08.2026</div><div class="text">Старт €50 за каждый начатый день просрочки</div></article>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Отсчёт до подачи иска">
+        <div class="court-wrap">
+          <div class="court-head">
+            <div><div class="eyebrow">Следующий юридический этап</div><h2 class="court-title" id="courtTitle">До подачи иска</h2></div>
+            <div class="court-badge" id="courtBadge">7-ДНЕВНЫЙ СРОК ИДЁТ</div>
+          </div>
+
+          <div class="court-count" id="courtCount">
+            <div class="court-unit"><div class="court-num" id="courtDays">--</div><span>дней</span></div>
+            <div class="court-unit"><div class="court-num" id="courtHours">--</div><span>часов</span></div>
+            <div class="court-unit"><div class="court-num" id="courtMinutes">--</div><span>минут</span></div>
+            <div class="court-unit"><div class="court-num" id="courtSeconds">--</div><span>секунд</span></div>
+          </div>
+
+          <div class="court-progress-shell">
+            <div class="court-progress-labels"><span>Срок добровольного исполнения</span><span id="courtProgressPct">0%</span></div>
+            <div class="court-progress" aria-label="Прогресс 7-дневного срока">
+              <div class="court-progress-fill" id="courtProgressFill"></div>
+              <div class="court-joke" id="courtJoke">ПОПАЛСЯ МАСТЕР ЗАТЯЖКИ 😅</div>
+            </div>
+          </div>
+
+          <div class="court-meta">
+            <div><b>Получение претензии</b><span>09.09.2026</span></div>
+            <div><b>Срок исполнения</b><span>7 календарных дней по тексту требования</span></div>
+            <div><b>Следующий этап</b><span>С 17.09.2026 — подача иска, если оплата не поступила</span></div>
+          </div>
+
+          <div class="court-expired" id="courtExpired"><strong>СРОК ИСТЁК</strong><p>Период добровольного исполнения завершён. Следующий этап по трекеру — подача иска. Денежная неустойка продолжает начисляться отдельно.</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head"><h2>Начисление по дням</h2><span id="historyCaption">—</span></div>
+        <div class="table-wrap"><div class="table-scroll" id="tableScroll"><table><thead><tr><th>День</th><th>Дата</th><th>За день</th><th>Неустойка</th><th>Всего</th></tr></thead><tbody id="historyBody"></tbody></table></div></div>
+        <div class="actions"><button class="primary" id="copyBtn">Скопировать сумму на сегодня</button><button id="printBtn">Печать / сохранить PDF</button></div>
+      </section>
+
+      <div class="footnote">Личный расчётный трекер. Он считает только основной долг €5 000 и договорную неустойку €50 за каждый начатый день просрочки с 01.08.2026. Законные проценты, судебные расходы, расходы на адвоката и возможная судебная корректировка неустойки в итог не включены. Отсчёт до подачи иска — информационный контрольный таймер по указанным датам, а не сообщение суда о назначенном заседании.</div>
+    </main>
+  </div>
+  <div class="toast" id="toast">Скопировано</div>
+
 <script>
-(()=>{'use strict';const TZ='Europe/Prague',PRINCIPAL=5000,DAILY=50,START={y:2026,m:8,d:1},DAY_MS=86400000;const euro=n=>new Intl.NumberFormat('ru-RU',{style:'currency',currency:'EUR',minimumFractionDigits:0,maximumFractionDigits:0}).format(n).replace(/\u00A0/g,' '),pad=n=>String(n).padStart(2,'0');function pragueParts(date=new Date()){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(date),v={};for(const p of parts)if(p.type!=='literal')v[p.type]=Number(p.value);if(v.hour===24)v.hour=0;return{y:v.year,m:v.month,d:v.day,hh:v.hour,mm:v.minute,ss:v.second}}const utcDay=p=>Math.floor(Date.UTC(p.y,p.m-1,p.d)/DAY_MS);function addDay(p,n=1){const d=new Date(Date.UTC(p.y,p.m-1,p.d+n));return{y:d.getUTCFullYear(),m:d.getUTCMonth()+1,d:d.getUTCDate()}}const dateRu=p=>`${pad(p.d)}.${pad(p.m)}.${p.y}`;function offsetMs(date,timeZone){const ps=new Intl.DateTimeFormat('en-US',{timeZone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(date),v={};for(const p of ps)if(p.type!=='literal')v[p.type]=Number(p.value);const hour=v.hour===24?0:v.hour;return Date.UTC(v.year,v.month-1,v.day,hour,v.minute,v.second)-date.getTime()}function localPragueToUtc(y,m,d,hh=0,mm=0,ss=0){const target=Date.UTC(y,m-1,d,hh,mm,ss);let guess=target;for(let i=0;i<4;i++)guess=target-offsetMs(new Date(guess),TZ);return new Date(guess)}function state(now=new Date()){const p=pragueParts(now),diff=utcDay(p)-utcDay(START),days=Math.max(0,diff+1),penalty=days*DAILY;return{p,days,penalty,total:PRINCIPAL+penalty}}function decl(n,one,few,many){n=Math.abs(n)%100;const n1=n%10;if(n>10&&n<20)return many;if(n1>1&&n1<5)return few;if(n1===1)return one;return many}function renderHistory(days){let html='';for(let i=0;i<days;i++){const d=addDay(START,i),penalty=(i+1)*DAILY;html+=`<tr class="${i===days-1?'today':''}"><td>#${i+1}</td><td>${dateRu(d)}</td><td class="plus">+€50</td><td>${euro(penalty)}</td><td class="sum">${euro(PRINCIPAL+penalty)}</td></tr>`}document.getElementById('historyBody').innerHTML=html||'<tr><td colspan="5">Просрочка ещё не началась.</td></tr>';document.getElementById('historyCaption').textContent=days?`01.08.2026 → ${dateRu(addDay(START,days-1))}`:'До начала просрочки';requestAnimationFrame(()=>{const box=document.getElementById('tableScroll');box.scrollTop=box.scrollHeight})}let renderedDays=-1;function tick(){const now=new Date(),s=state(now);document.getElementById('penaltyHero').textContent=euro(s.penalty);document.getElementById('daysHero').textContent=`${s.days} ${decl(s.days,'день','дня','дней')}`;document.getElementById('daysCard').textContent=s.days;document.getElementById('penaltyCard').textContent=euro(s.penalty);document.getElementById('totalCard').textContent=euro(s.total);document.getElementById('pragueNow').textContent=`${dateRu(s.p)} · ${pad(s.p.hh)}:${pad(s.p.mm)}:${pad(s.p.ss)}`;const next=addDay(s.p,1),nextMidnight=localPragueToUtc(next.y,next.m,next.d,0,0,0);let left=Math.max(0,nextMidnight.getTime()-now.getTime());const h=Math.floor(left/3600000);left-=h*3600000;const m=Math.floor(left/60000);left-=m*60000;const sec=Math.floor(left/1000);document.getElementById('nextTick').textContent=`${pad(h)}:${pad(m)}:${pad(sec)}`;const elapsedSeconds=s.p.hh*3600+s.p.mm*60+s.p.ss;document.getElementById('dayProgress').style.width=`${Math.min(100,(elapsedSeconds/86400)*100)}%`;if(s.days!==renderedDays){renderHistory(s.days);renderedDays=s.days}}document.getElementById('copyBtn').addEventListener('click',async()=>{const s=state(),text=`На ${dateRu(s.p)}: ${s.days} начатых дней просрочки × €50 = ${euro(s.penalty)} договорной неустойки. Основной долг: €5 000. Итого без процентов и судебных расходов: ${euro(s.total)}.`;try{await navigator.clipboard.writeText(text)}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}const toast=document.getElementById('toast');toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1300)});document.getElementById('printBtn').addEventListener('click',()=>window.print());tick();setInterval(tick,1000)})();
+(()=>{
+  'use strict';
+
+  const TZ='Europe/Prague';
+  const PRINCIPAL=5000;
+  const DAILY=50;
+  const START={y:2026,m:8,d:1};
+  const DAY_MS=86400000;
+
+  // По подтверждённой в переписке дате получения/прочтения претензии.
+  // 7 полных календарных дней: 10–16 сентября; следующий шаг с 17.09.2026.
+  const CLAIM_PERIOD_START={y:2026,m:9,d:10};
+  const CLAIM_FILING={y:2026,m:9,d:17};
+
+  const euro=n=>new Intl.NumberFormat('ru-RU',{style:'currency',currency:'EUR',minimumFractionDigits:0,maximumFractionDigits:0}).format(n).replace(/\u00A0/g,' ');
+  const pad=n=>String(n).padStart(2,'0');
+  const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
+
+  function pragueParts(date=new Date()){
+    const parts=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(date);
+    const v={};
+    for(const p of parts) if(p.type!=='literal') v[p.type]=Number(p.value);
+    if(v.hour===24) v.hour=0;
+    return {y:v.year,m:v.month,d:v.day,hh:v.hour,mm:v.minute,ss:v.second};
+  }
+
+  const utcDay=p=>Math.floor(Date.UTC(p.y,p.m-1,p.d)/DAY_MS);
+
+  function addDay(p,n=1){
+    const d=new Date(Date.UTC(p.y,p.m-1,p.d+n));
+    return {y:d.getUTCFullYear(),m:d.getUTCMonth()+1,d:d.getUTCDate()};
+  }
+
+  const dateRu=p=>`${pad(p.d)}.${pad(p.m)}.${p.y}`;
+
+  function offsetMs(date,timeZone){
+    const ps=new Intl.DateTimeFormat('en-US',{timeZone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(date);
+    const v={};
+    for(const p of ps) if(p.type!=='literal') v[p.type]=Number(p.value);
+    const hour=v.hour===24?0:v.hour;
+    return Date.UTC(v.year,v.month-1,v.day,hour,v.minute,v.second)-date.getTime();
+  }
+
+  function localPragueToUtc(y,m,d,hh=0,mm=0,ss=0){
+    const target=Date.UTC(y,m-1,d,hh,mm,ss);
+    let guess=target;
+    for(let i=0;i<4;i++) guess=target-offsetMs(new Date(guess),TZ);
+    return new Date(guess);
+  }
+
+  function state(now=new Date()){
+    const p=pragueParts(now);
+    const diff=utcDay(p)-utcDay(START);
+    const days=Math.max(0,diff+1);
+    const penalty=days*DAILY;
+    return {p,days,penalty,total:PRINCIPAL+penalty};
+  }
+
+  function decl(n,one,few,many){
+    n=Math.abs(n)%100;
+    const n1=n%10;
+    if(n>10&&n<20) return many;
+    if(n1>1&&n1<5) return few;
+    if(n1===1) return one;
+    return many;
+  }
+
+  function renderHistory(days){
+    let html='';
+    for(let i=0;i<days;i++){
+      const d=addDay(START,i);
+      const penalty=(i+1)*DAILY;
+      html+=`<tr class="${i===days-1?'today':''}"><td>#${i+1}</td><td>${dateRu(d)}</td><td class="plus">+€50</td><td>${euro(penalty)}</td><td class="sum">${euro(PRINCIPAL+penalty)}</td></tr>`;
+    }
+    document.getElementById('historyBody').innerHTML=html||'<tr><td colspan="5">Просрочка ещё не началась.</td></tr>';
+    document.getElementById('historyCaption').textContent=days?`01.08.2026 → ${dateRu(addDay(START,days-1))}`:'До начала просрочки';
+    requestAnimationFrame(()=>{const box=document.getElementById('tableScroll');box.scrollTop=box.scrollHeight});
+  }
+
+  function renderCourt(now){
+    const start=localPragueToUtc(CLAIM_PERIOD_START.y,CLAIM_PERIOD_START.m,CLAIM_PERIOD_START.d,0,0,0).getTime();
+    const filing=localPragueToUtc(CLAIM_FILING.y,CLAIM_FILING.m,CLAIM_FILING.d,0,0,0).getTime();
+    const nowMs=now.getTime();
+    const total=Math.max(1,filing-start);
+    const elapsed=clamp(nowMs-start,0,total);
+    const progress=clamp((elapsed/total)*100,0,100);
+
+    document.getElementById('courtProgressFill').style.width=`${progress}%`;
+    document.getElementById('courtProgressPct').textContent=`${progress.toFixed(1)}%`;
+    document.getElementById('courtJoke').style.clipPath=`inset(0 ${100-progress}% 0 0)`;
+
+    const expired=nowMs>=filing;
+    document.getElementById('courtExpired').style.display=expired?'block':'none';
+    document.getElementById('courtCount').style.display=expired?'none':'grid';
+    document.getElementById('courtTitle').textContent=expired?'Срок добровольного исполнения завершён':'До подачи иска';
+    document.getElementById('courtBadge').textContent=expired?'СЛЕДУЮЩИЙ ЭТАП — ИСК':'7-ДНЕВНЫЙ СРОК ИДЁТ';
+
+    if(expired) return;
+
+    let left=Math.max(0,filing-nowMs);
+    const days=Math.floor(left/DAY_MS); left-=days*DAY_MS;
+    const hours=Math.floor(left/3600000); left-=hours*3600000;
+    const minutes=Math.floor(left/60000); left-=minutes*60000;
+    const seconds=Math.floor(left/1000);
+
+    document.getElementById('courtDays').textContent=pad(days);
+    document.getElementById('courtHours').textContent=pad(hours);
+    document.getElementById('courtMinutes').textContent=pad(minutes);
+    document.getElementById('courtSeconds').textContent=pad(seconds);
+  }
+
+  let renderedDays=-1;
+
+  function tick(){
+    const now=new Date();
+    const s=state(now);
+
+    document.getElementById('penaltyHero').textContent=euro(s.penalty);
+    document.getElementById('daysHero').textContent=`${s.days} ${decl(s.days,'день','дня','дней')}`;
+    document.getElementById('daysCard').textContent=s.days;
+    document.getElementById('penaltyCard').textContent=euro(s.penalty);
+    document.getElementById('totalCard').textContent=euro(s.total);
+    document.getElementById('pragueNow').textContent=`${dateRu(s.p)} · ${pad(s.p.hh)}:${pad(s.p.mm)}:${pad(s.p.ss)}`;
+
+    const next=addDay(s.p,1);
+    const nextMidnight=localPragueToUtc(next.y,next.m,next.d,0,0,0);
+    let left=Math.max(0,nextMidnight.getTime()-now.getTime());
+    const h=Math.floor(left/3600000); left-=h*3600000;
+    const m=Math.floor(left/60000); left-=m*60000;
+    const sec=Math.floor(left/1000);
+    document.getElementById('nextTick').textContent=`${pad(h)}:${pad(m)}:${pad(sec)}`;
+
+    const elapsedSeconds=s.p.hh*3600+s.p.mm*60+s.p.ss;
+    document.getElementById('dayProgress').style.width=`${Math.min(100,(elapsedSeconds/86400)*100)}%`;
+
+    if(s.days!==renderedDays){renderHistory(s.days);renderedDays=s.days}
+    renderCourt(now);
+  }
+
+  document.getElementById('copyBtn').addEventListener('click',async()=>{
+    const s=state();
+    const text=`На ${dateRu(s.p)}: ${s.days} начатых дней просрочки × €50 = ${euro(s.penalty)} договорной неустойки. Основной долг: €5 000. Итого без процентов и судебных расходов: ${euro(s.total)}.`;
+    try{await navigator.clipboard.writeText(text)}catch(e){
+      const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+    }
+    const toast=document.getElementById('toast');toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1300);
+  });
+
+  document.getElementById('printBtn').addEventListener('click',()=>window.print());
+  tick();
+  setInterval(tick,1000);
+})();
 </script>
 </body>
 </html>
